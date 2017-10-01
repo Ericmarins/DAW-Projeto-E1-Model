@@ -1,12 +1,6 @@
 package br.edu.ifsul.testes.junit;
 
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
-import br.edu.ifsul.modelo.PessoaFisica;
-import br.edu.ifsul.modelo.Produto;
-import br.edu.ifsul.modelo.Telefone;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import br.edu.ifsul.modelo.Recurso;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -14,23 +8,22 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author jorge
+ * @author eric_
  */
-public class TestePersistirDesejo {
+public class TestePersistirRecurso {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirDesejo() {
+    public TestePersistirRecurso() {
     }
     
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DAW-5N1-2017-2-PU");
+        emf = Persistence.createEntityManagerFactory("DAW-Projeto-E1");
         em = emf.createEntityManager();
     }
     
@@ -44,12 +37,10 @@ public class TestePersistirDesejo {
     public void teste(){
        boolean exception = false;
        try {
-           
-           PessoaFisica pf = em.find(PessoaFisica.class, 3);           
-           Produto p = em.find(Produto.class, 1);
-           pf.getDesejos().add(p);
+           Recurso r = new Recurso();
+           r.setDescricao("Restaurante com café almoço e janta.");
            em.getTransaction().begin();
-           em.persist(pf);
+           em.persist(r);
            em.getTransaction().commit();
        } catch (Exception e){
            e.printStackTrace();

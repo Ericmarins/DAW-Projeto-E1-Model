@@ -1,11 +1,6 @@
 package br.edu.ifsul.testes.junit;
 
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
-import br.edu.ifsul.modelo.PessoaFisica;
-import br.edu.ifsul.modelo.Telefone;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import br.edu.ifsul.modelo.Condominio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,23 +8,22 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author jorge
+ * @author eric_
  */
-public class TestePersistirTelefone {
+public class TestePersistirCondominio {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirTelefone() {
+    public TestePersistirCondominio() {
     }
     
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DAW-5N1-2017-2-PU");
+        emf = Persistence.createEntityManagerFactory("DAW-Projeto-E1");
         em = emf.createEntityManager();
     }
     
@@ -44,16 +38,13 @@ public class TestePersistirTelefone {
        boolean exception = false;
        try {
            
-           PessoaFisica pf = em.find(PessoaFisica.class, 3);
-           Telefone casa = new Telefone();
-           casa.setNumero("(54)3045-9875");
-           pf.adicionarTelefone(casa);
-           Telefone celular = new Telefone();
-           celular.setNumero("(54)99987-9843");
-           celular.setDescricao("Celular");
-           pf.adicionarTelefone(celular);                
+           Condominio c  = new Condominio();
+           c.setEndereco("Rua Teste 1");
+           c.setNome("Condominio Teste");
+           c.setNumero("1697");
+           c.setCep("99500-000");
            em.getTransaction().begin();
-           em.persist(pf);
+           em.persist(c);
            em.getTransaction().commit();
        } catch (Exception e){
            e.printStackTrace();

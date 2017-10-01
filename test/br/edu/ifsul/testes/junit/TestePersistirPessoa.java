@@ -1,7 +1,6 @@
 package br.edu.ifsul.testes.junit;
 
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
+import br.edu.ifsul.modelo.Pessoa;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,23 +8,22 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author jorge
+ * @author eric_
  */
-public class TestePersistirCidade {
+public class TestePersistirPessoa {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirCidade() {
+    public TestePersistirPessoa() {
     }
     
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DAW-5N1-2017-2-PU");
+        emf = Persistence.createEntityManagerFactory("DAW-Projeto-E1");
         em = emf.createEntityManager();
     }
     
@@ -39,12 +37,13 @@ public class TestePersistirCidade {
     public void teste(){
        boolean exception = false;
        try {
-           Cidade c = new Cidade();
-           c.setNome("Passo Fundo");
-           Estado e = em.find(Estado.class, 1);
-           c.setEstado(e);
+           Pessoa p = new Pessoa();
+           p.setNome("Eric Marins");
+           p.setCpf("697.051.030-11");
+           p.setEmail("eric_marins@hotmail.com");
+           p.setTelefone("(54)999223344");           
            em.getTransaction().begin();
-           em.persist(c);
+           em.persist(p);
            em.getTransaction().commit();
        } catch (Exception e){
            e.printStackTrace();

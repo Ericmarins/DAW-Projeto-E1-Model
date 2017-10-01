@@ -1,8 +1,8 @@
 package br.edu.ifsul.testes.junit;
 
-import br.edu.ifsul.modelo.Grupo;
-import br.edu.ifsul.modelo.Marca;
-import br.edu.ifsul.modelo.Produto;
+import br.edu.ifsul.modelo.UnidadeCondominial;
+import br.edu.ifsul.modelo.Pessoa;
+import br.edu.ifsul.modelo.Condominio;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,19 +13,19 @@ import org.junit.Test;
 
 /**
  *
- * @author jorge
+ * @author eric_
  */
-public class TestePersistirProduto {
+public class TestePersistirUnidadeCondominial {
 
     EntityManagerFactory emf;
     EntityManager em;
 
-    public TestePersistirProduto() {
+    public TestePersistirUnidadeCondominial() {
     }
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DAW-5N1-2017-2-PU");
+        emf = Persistence.createEntityManagerFactory("DAW-Projeto-E1");
         em = emf.createEntityManager();
     }
 
@@ -39,21 +39,17 @@ public class TestePersistirProduto {
     public void teste() {
         boolean exception = false;
         try {
-            Grupo g = new Grupo();
-            g.setNome("Eletrônicos");
-            Marca m = new Marca();
-            m.setNome("Microsoft");
-            Produto p = new Produto();
-            p.setNome("Mouse Microsoft");
-            p.setDescricao("Mouse Laser");
-            p.setPreco(80.00);
-            p.setEstoque(10.0);
-            p.setGrupo(g);
-            p.setMarca(m);
+            Pessoa p = em.find(Pessoa.class, 2);
+            Condominio c = em.find(Condominio.class, 1);
+            UnidadeCondominial uc = new UnidadeCondominial();
+            uc.setArea(125.00);
+            uc.setCondominio(c);
+            uc.setProprietario(p);
+            uc.setDescricao("Dois quartos, sala, cozinha, banheiro e vaga na garagem.");
+            uc.setNumero("456-B");
+            uc.setNumeroQuarto(12);
             em.getTransaction().begin();
-            em.persist(g);
-            em.persist(m);
-            em.persist(p);
+            em.persist(uc);
             em.getTransaction().commit();
 
         } catch (Exception e) {

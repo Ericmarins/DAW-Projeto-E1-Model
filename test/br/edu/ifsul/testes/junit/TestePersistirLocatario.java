@@ -1,9 +1,7 @@
 package br.edu.ifsul.testes.junit;
 
 
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Usuario;
-import java.util.Calendar;
+import br.edu.ifsul.modelo.Locatario;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -16,17 +14,17 @@ import org.junit.Test;
  *
  * @author jorge
  */
-public class TestePersistirUsuario {
+public class TestePersistirLocatario {
 
     EntityManagerFactory emf;
     EntityManager em;
 
-    public TestePersistirUsuario() {
+    public TestePersistirLocatario() {
     }
 
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DAW-5N1-2017-2-PU");
+        emf = Persistence.createEntityManagerFactory("DAW-Projeto-E1");
         em = emf.createEntityManager();
     }
 
@@ -39,21 +37,14 @@ public class TestePersistirUsuario {
     public void teste() {
         boolean exception = false;
         try {
-            Usuario obj = new Usuario();
-            obj.setNome("João");
-            obj.setBairro("Centro");
-            obj.setCep("99999-999");
-            obj.setCidade(em.find(Cidade.class, 4));
-            obj.setComplemento("AP 400");
-            obj.setCpf("633.443.230-32");
-            obj.setEmail("jorge.bavaresco@passofundo.ifsul.edu.br");
-            obj.setEndereco("Rua tal");
-            obj.setNascimento(Calendar.getInstance());
-            obj.setRg("8898584392");
-            obj.setApelido("usuario");
-            obj.setSenha("usuario");
-            obj.setAdministrador(true);
-            obj.setAtivo(true);
+            Locatario obj = new Locatario();
+            obj.setNome("Eric");
+            obj.setCpf("697.051.030-11");
+            obj.setEmail("eric_marins@hotmail.com");
+            obj.setTelefone("(54)999223344");
+            obj.setRenda(1400.00);
+            obj.setLocalTrabalho("Cia Teste");
+            obj.setTelefoneTrabalho("3329-3566");
             em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();

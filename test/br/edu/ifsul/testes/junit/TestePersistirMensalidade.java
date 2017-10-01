@@ -1,8 +1,7 @@
 package br.edu.ifsul.testes.junit;
 
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.modelo.Estado;
-import br.edu.ifsul.modelo.PessoaFisica;
+import br.edu.ifsul.modelo.Mensalidades;
+import br.edu.ifsul.modelo.Aluguel;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.persistence.EntityManager;
@@ -12,23 +11,22 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
- * @author jorge
+ * @author eric_
  */
-public class TestePersistirPessoaFisica {
+public class TestePersistirMensalidade {
     
     EntityManagerFactory emf;
     EntityManager em;
     
-    public TestePersistirPessoaFisica() {
+    public TestePersistirMensalidade() {
     }
     
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DAW-5N1-2017-2-PU");
+        emf = Persistence.createEntityManagerFactory("DAW-Projeto-E1");
         em = emf.createEntityManager();
     }
     
@@ -42,20 +40,15 @@ public class TestePersistirPessoaFisica {
     public void teste(){
        boolean exception = false;
        try {
-           Cidade c = em.find(Cidade.class, 4);
-           PessoaFisica pf = new PessoaFisica();
-           pf.setCidade(c);
-           pf.setNome("Jorge Bavaresco");
-           pf.setBairro("Vila Luiza");
-           pf.setCep("99874-098");
-           pf.setComplemento("blablabla");
-           pf.setCpf("454.183.067-15");
-           pf.setEmail("jorge.bavaresco@passofundo.ifsul.edu.br");
-           pf.setEndereco("Rua tal...");
-           pf.setNascimento(new GregorianCalendar(1979, Calendar.OCTOBER, 25));
-           pf.setRg("8758940394");           
+           Aluguel a= em.find(Aluguel.class, 1);
+           Mensalidades m= new Mensalidades();
+           m.setAluguel(a);
+           m.setValor(800.00);
+           m.setValorPagamento(800.00);
+           m.setVencimento(new GregorianCalendar(2017, Calendar.NOVEMBER, 10));
+           m.setDataPagamento(new GregorianCalendar(2017, Calendar.OCTOBER, 9));                
            em.getTransaction().begin();
-           em.persist(pf);
+           em.persist(m);
            em.getTransaction().commit();
        } catch (Exception e){
            e.printStackTrace();
