@@ -32,13 +32,14 @@ public class Recurso implements Serializable{
     @GeneratedValue(generator = "seq_recurso", strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Column(name = "descricao", columnDefinition = "text")
-    private String descricao;@ManyToMany
+    private String descricao;
+    @ManyToMany
     @JoinTable(name = "recursos",
             joinColumns = 
             @JoinColumn(name = "recurso", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = 
             @JoinColumn(name = "condominio", referencedColumnName = "id", nullable = false))    
-    private List<Recurso> recursos= new ArrayList<>();
+    private List<Condominio> recursos= new ArrayList<>();
     
     public Recurso(){
         
@@ -85,11 +86,11 @@ public class Recurso implements Serializable{
         return true;
     }
 
-    public List<Recurso> getRecursos() {
+    public List<Condominio> getRecursos() {
         return recursos;
     }
 
-    public void setRecursos(List<Recurso> recursos) {
+    public void setRecursos(List<Condominio> recursos) {
         this.recursos = recursos;
     }
     
